@@ -1,0 +1,695 @@
+PROGRAM2: PHP & GD
+
+PHP & GD
+
+PROGRAM2
+
+Reader GD library
+JAAR 2025-2026
+OPLEIDING CREATIVE SOFTWARE DEVELOPER
+
+1
+
+PROGRAM2: PHP & GD
+
+INHOUDSOPGAVE
+INLEIDING ....................................................................................................................................... 3
+LEERDOELEN ................................................................................................................................. 3
+PLANNING ...................................................................................................................................... 3
+HOOFDSTUK 1: PHP & GD ............................................................................................................. 4
+TUTORIALS ................................................................................................................................................... 4
+Oefening 1.1 ..........................................................................................................................................5
+HOOFDSTUK 2: BESTANDEN UPLOADEN .................................................................................... 6
+UPLOADFORMULIER ..................................................................................................................................... 6
+MOVE_UPLOADED_FILES() ........................................................................................................................... 8
+MIME-TYPE ................................................................................................................................................. 9
+OPSLAAN IN DATABASE TABEL ...................................................................................................................... 9
+OVERZICHTSPAGINA ................................................................................................................................... 10
+HOOFDSTUK 3: THUMBNAILS ..................................................................................................... 11
+THUMBNAIL MAKEN..................................................................................................................................... 11
+getimagesize() ..................................................................................................................................... 12
+imagecreatefromjpeg() ........................................................................................................................ 12
+imagecreatetruecolor() ........................................................................................................................ 13
+imagecopyresampled() ....................................................................................................................... 13
+imagejpeg() .......................................................................................................................................... 13
+imagedestroy() .................................................................................................................................... 14
+Oefening 3.1 ........................................................................................................................................ 15
+DETAILPAGINA MET THUMBNAILS ................................................................................................................ 15
+HOOFDSTUK 4: WATERMERK ..................................................................................................... 16
+Een watermerk op een afbeelding plaatsen ...................................................................................... 16
+imagecopymerge() .............................................................................................................................. 17
+Oefening 4.1 ........................................................................................................................................ 18
+Tekst op afbeelding ............................................................................................................................. 19
+OPDRACHTEN .............................................................................................................................. 20
+OPDRACHT 1 .......................................................................................................................................... 20
+OPDRACHT 1 (EXTRA)............................................................................................................................. 20
+OPDRACHT 2 .......................................................................................................................................... 21
+OPDRACHT 3 .......................................................................................................................................... 21
+
+2
+
+PROGRAM2: PHP & GD
+INLEIDING
+
+Tijdens de vorige module hebben jullie geleerd hoe je een beveiligde crud-applicatie
+moet opzetten.
+Deze periode gaan jullie gebruik maken van de gd-library.
+De meste uutleg staat in de ze reader; als jullie iets missen dan zullie zelf daarvoor
+op zoek moeten gaan op internet, bijvoorbeeld d.m.v. links naar tutorials.
+
+Veel succes!
+
+LEERDOELEN
+
+•
+•
+•
+•
+
+Ik upload bestanden en plaats deze in de juiste map.
+Ik controleer de bestanden voordat ik deze bewaar
+Ik maak thumbnails ge-uploade afbeeldingen
+Ik plaats een watermerk op een ge-uploade afbeelding
+
+PLANNING
+
+LES + ONDERWERP
+Week 1,
+H1 PHP & gd
+H2 bestanden uploaden
+
+TIJD
+
+OPDRACHTEN
+
+0,3 uur
+1,7 uur
+
+OEFENING 1.1
+OPDRACHT 1 (+extra)
+
+Week 2
+H3 thumbnails
+
+2 uur
+
+OPDRACHT 2
+
+Week 3
+H4 watermerk
+
+2 uur
+
+OPDRACHT 3
+
+3
+
+PROGRAM2: PHP & GD
+HOOFDSTUK 1: PHP & GD
+
+De gd-library in PHP wordt gebruikt om dynamische of gewone afbeeldingen de
+maken. Ook kunnen met deze library de afbeldingen worden aangepast.
+De letters “gd” stonden in eerste instantie voor “gif draw”. Aangezien de library ook
+andere formaten ondersteunt, wordt nu vaak over “graphics draw”gesproken.
+In de nieuwste versies van php wordt de gd-library automatisch geïnstalleerd. Dit kan
+je controleren door in een php-pagina op te roepen met ‘phpinfo()’:
+
+De library staat standaard op PLESK geïnstalleerd. Als deze library er niet tussen
+Dan zal je die zelf moeten installeren. Zoek zelf op internet hoe dit moet. (bijv:
+https://www.geeksforgeeks.org/php/how-to-install-php-gd-in-windows/ )
+Tijdens beroepsopdrachten zal je regelmatig afbeeldingen moeten uploaden.
+Hiervoor maken we gebruik van de functies die de gd-library biedt.
+Binnen de library zijn ook functies om afbeeldingen te verkleinen om zo thumbnails te
+maken en om een watermerk op een afbeelding te plaatsen. Ook kan je zelf
+afbeeldingen maken met de gd-library.
+
+Tutorials
+Op internet zijn diverse tutorials te vinden over het werken met de gd-library.
+Bijvoorbeeld:
+4
+
+PROGRAM2: PHP & GD
+•
+
+Upload (met check):
+https://www.w3schools.com/php/php_file_upload.asp
+Thumbnail:
+https://www.techzine.nl/howtos/devops/28529/php-een-thumbnail-maken-metgd/
+Watermerk:
+https://www.sourcecodester.com/tutorial/php/15772/adding-watermark-imagephp-using-gd-library-tutorial
+Zelf afbeelding maken:
+https://www.phpforkids.com/php/php-gd-library-create-image.php
+
+•
+
+•
+
+•
+
+•
+
+En natuurlijk PHP.net:
+https://www.php.net/manual/en/book.image.php
+
+De reader legt niet alles uit. Dus je zal zelf regelmatig gebruik moeten maken van
+tutorials om de opdrachten te kunnen maken.
+Zoek daarom ook zelf naar goede tutorials over php en de gd-library.
+
+Oefening 1.1
+Maak een php-pagina met de naam phpinfo.php.
+De enige regel die je hierin hoeft te typen is: ‘phpinfo()’.
+Open de pagina in de browser en bekijk het resultaat.
+•
+•
+•
+•
+•
+
+Is gd geïnstalleerd? Welke versie?
+Hoeveel MB mag een bestand zijn dat je uploadt?
+Hoeveel bestanden kan je tegelijkertijd uploaden?
+Wat voor informatie kan je nog meer ophalen over gd-library en het uploaden
+van bestanden?
+Kan je de gegevens wijzigen? Zo ja: hoe?
+
+(Tip: dit staat in phpinfo() onder ‘Core’)
+Maak bij elke oefening een screenshot van het eindresultaat en verwerk deze in een
+Word-document. Lever dit document in als alle oefeningen uit dit hoofdstuk gemaakt
+zijn.
+
+5
+
+PROGRAM2: PHP & GD
+HOOFDSTUK 2: BESTANDEN UPLOADEN
+
+In principe gebruik je niet de gd-library om bestanden te uploaden. Je kan namelijk
+elk type bestand uploaden naar de server.
+Je gebruikt hiervoor de functie ‘move_uploaded_file()’. Hiermee wordt een bestand
+dat via een formulier naar de server is gestuurd, verplaatst daar de juiste map, en
+opgeslagen met de juiste naam.
+Je moet dan wel een formulier maken waarmee je een bestand kan uploaden.
+Na het uploaden sla je de gegevens van het bestand op in een databasetabel.
+
+Uploadformulier
+Als we ons houden aan de afspraak om code en view te scheiden, dan ziet de
+pagina ‘upload.php’ er zo uit:
+
+Het formulier staat in ‘upload_view.php’:
+
+In het formulier zijn een paar verschill;en te zien ten opzichte van een ‘gewoon’
+formulier:
+•
+•
+
+Aan de form-tag is een ‘enctype’ toegevoegd: ‘multipart/form-data’
+Het veld waarin het bestand wordt meegestuurd is van het type ‘file’
+
+In de verwerkpagina, ‘upload_verwerk.php’, gaan we eerst kijken wat we precies
+binnen krijgen. Daarvoor gebruiken we de functie ‘print_r()’. Als je wilt, kan je ook
+‘var_dump()” gebruiken.
+Deze functie(s) gebruiken we om een array uit te lezen. Er klomen vanuit het
+formulier namelijk 2 array’s binnen:
+
+6
+
+PROGRAM2: PHP & GD
+•
+•
+
+$_POST met daarin de formulier-data
+$_FILES met daarin de gegevens van het ge-uploade bestand
+
+$_FILES geeft alle informatie over het meegestuurde bestand:
+
+Deze array levert de volgende gegevens:
+Key
+
+Betekenis
+
+name
+
+De originele bestandsnaam zoals geüpload door de gebruiker.
+
+type
+
+Het MIME-type dat de browser doorgeeft (bijv. image/png). Niet 100%
+betrouwbaar.
+
+tmp_name
+
+Het tijdelijke bestandspad op de server waar PHP het bestand
+opslaat.
+
+error
+
+Uploadstatus als foutcode (0 = geen fout).
+
+size
+
+De grootte van het bestand in bytes.
+
+7
+
+PROGRAM2: PHP & GD
+
+move_uploaded_files()
+Zoals je hierboven kunt zien wordt het bestand opgeslagen op een tijdelijke plek.
+het is aan jou om aan te geven wat er met dat tijdelijke bestand moet gaan gebeuren.
+Het bestand wordt in de juiste map geplaatst met de functie
+‘move_uploaded_files($van, $naar)’.
+In deze functie geef je aan:
+•
+•
+
+$van: Welk bestand verplaatst moet worden (het tijdelijke bestand)
+$naar: In welke map het bestand geplaatst moet worden, en onder welke naam
+
+Hieronder een voorbeeld:
+
+Je ziet dat de $_FILES – array eerst wordt opgeslagen onder de naam ‘$bestand’
+Daarna wordt het tijdelijke bestand ($bestand[“tmp_name”]) verplaats naar de map
+‘files’ ($map), onder de juiste naam ($bestand[“name”]).
+LET OP de extra slash (“/”) tussen de mapnaam en de bestandsnaam!
+
+Extra informatie over ‘move_uploaded_file()’ is o.a. te vinden op:
+•
+•
+
+https://www.geeksforgeeks.org/php/php-move_uploaded_file-function/
+https://www.w3schools.com/php/func_filesystem_move_uploaded_file.asp
+
+8
+
+PROGRAM2: PHP & GD
+
+MIME-type
+Bij het uploaden van het bestand wordt ook de MIME-type meegegeven, oftewel het
+type van het bestand. Hiermee kan je bepalen wat voor soort bestand er wordt geupload.
+LET OP: deze methode is nioet 100% betrouwbaar! Maar als eerste controle voldoet
+dit voorlopig.
+De meest gebruikte afbeelding-typen die je hiermee kan vinden zijn:
+Bestandstype
+
+MIME-type
+
+JPEG/JPG
+
+image/jpeg
+
+PNG
+
+image/png
+
+GIF
+
+image/gif
+
+WebP
+
+image/webp
+
+BMP
+
+image/bmp
+
+SVG
+
+image/svg+xml
+
+TIFF
+
+image/tiff
+
+ICO (favicon)
+
+image/x-icon
+
+Opslaan in database tabel
+Nu ga je de gegevens opslaan in de database.
+Maak daarvoor in de database “PROGRAM2” een nieuwe tabel. Bijvoorbeeld
+“gd_files”:
+
+9
+
+PROGRAM2: PHP & GD
+De gegevens worden pas in de tabel gezet als het uploaden is gelukt:
+
+Het opslaan van gegevens in een databasetabel heb je de vorige module geleerd.
+LET OP: De naam van de map staat NIET in de tabel. Alleen de naam van het
+bestand. Dus bij het veld ‘Bestand’ zet je alleen de bestansnaam.
+
+Overzichtspagina
+Als je afbeeldingen opslaat in de database, dan wil je die ook weer kunnen tonen op
+een pagina. Je kan aarvoor een overzichtspagina maken.
+Het uitlezen van de gegevens van de database tabel wordt hier niet uitgelegd; ook dit
+heb je al bij de vorige module geleerd.
+De view zou er als volgt uit kunnen zien:
+
+Let op dat je een afbeelding wilt tonen die in een aparte map staat.
+je gebruikt dus de tag ‘<img />’, en daarbinnen noem je de juiste map. Daarachter
+plaats je een slash (‘/’) voordat je de bestandsnaam koppelt.
+Om elke afbeelding even hoog te maken, wordt er in het voorbeeld een ‘height’
+gegeven aan elke afbeelding.
+10
+
+PROGRAM2: PHP & GD
+HOOFDSTUK 3: THUMBNAILS
+
+Je weet nu hoe je een afbeelding kan uploaden, in een database kan zetten en
+daarna op een overzichtspagina kan tonen.
+Het tonen van de afbeedlingen kan voor problemen zorgen: niet alle afbeeldingen
+zijn even groot. Daarmee bedoelen we zowel de grootte in pixels als in MB.
+Om ervoor te zorgen dat de afbeeldingen netjes op de overzichtspagina verschijnen,
+en dat het laden van de pagina niet te lang duurt, ga je thumbnails maken.
+Hiervoor maak je gebruik van diverse functies binnen de gd-library van PHP.
+
+Thumbnail maken
+CHECKEN OP TYPE
+In het vorige hoofdstuk heb
+Om een thumbnail te maken van de ge-uploade afbeelding doen we het volgende:
+1. We maken een kopie van het originele bestand.
+2. We maken een nieuw ‘canvas’.
+Dit canvas heeft de grootte van de thumbnail.
+3. We kopiëren (en verkleinen) de kopie naar dit canvas.
+4. We slaan het canvas met het verkleinde origineel op.
+Allereerst zorg je er voor dat het originele bestand is ge-upload en in de juiste map
+staat (‘files’). Dus we gaan verder met de code uit het vorige hoofdstuk:
+
+Er is één variabele toegevoegd: ‘$tn_map’ is de map voor de thumbnails.
+11
+
+PROGRAM2: PHP & GD
+
+getimagesize()
+In de array staan niet de afmetingen van de afbeelding. Die hebben we wel nodig om
+te weten hoever we moeten verkleinen.
+Daarvoor zetten we afbeelding in de functie getimagesize():
+Als we onderstaande code toevoegen aan de “if()”:
+
+Dan krijgen we het volgende te zien op het scherm:
+
+We hebben hier 3 elementen van nodig:
+•
+•
+•
+
+[0]
+= de breedte van de afbeelding
+[1]
+= de hoogte van de afbeelding
+[mime] = de type afbeelding
+
+imagecreatefromjpeg()
+Nu gaan we eerst een werkbare kopie maken van het originele bestand uit de $map
+‘files’.
+Daarvoor gebruiken we de functie ‘imagecreatefromjpeg()’:
+
+12
+
+PROGRAM2: PHP & GD
+
+imagecreatetruecolor()
+Stap 2 is het maken van een leeg canvas. Dit canvas heeft de maten van de
+thumbnail die we willen maken. En in dit canvas wordt de originele afdeling
+(verkleind) geplaatst.
+Voor het maken van een leeg canvas gebruiken we de functie
+imagecreatetruecolor():
+
+Je ziet dat de thumbnail 100 x 100 pixels wordt.
+
+imagecopyresampled()
+Nu gaan we de kopie van het origineel ($origineel) verkleinen en plaatsen in het
+canvas ($thumb).
+Dit gebeurt met de meest uitgebreide functie die we nodig hebben:
+imagecopyresampled():
+
+Let op de volgorde van de diverse variabelen: eerst de gegevens van de thumbnail,
+daarna van het origineel.
+Als laatste zie je de breedte en hoogte van het origineel staan (‘info[0], info[1]’);
+
+imagejpeg()
+Als laatste slaan we het gevulde canvas op onder de juiste naam. De functie hiervoor
+is imagejpeg().
+Het is gemakkelijk om de naam van de thumbnail hetzelfde te maken als de naam
+van het origineel. We geven er alleen prefix aan: ‘tn_’:
+
+Let goed op waar en hoe je de thumbnail opslaat:
+•
+
+In de map ‘thumbnails’. ($tn_map)
+13
+
+PROGRAM2: PHP & GD
+•
+
+Naam: ‘tn_<origineel>’.
+De slash (‘/’) staat tussen de mapnaam en de naam van de thumbnail.
+
+Om de functie is een ‘if()’ geplaatst om de gebruiker te laten weten als het is gelukt.
+In principe kan je een ‘if()’ om elke functie zetten. Want elke functie is een
+voorwaarde om de volgende te mogen uitvoeren.
+
+imagedestroy()
+Als laatste gooien we de werkbestanden weg, zodat de geheugenruimte wordt
+vrijgemaakt. Hiervoor gebruiken we de functie imagedestroy():
+
+De volledige code is nu als volgt:
+
+LET OP:
+Twee functies zijn afhankelijk van het type afbeelding:
+•
+•
+
+Imagecreatefromjpeg();
+Imagejpeg()
+
+Je kan bovenstaande code dus niet zomaar toepassen op gif’s of png’s.
+14
+
+PROGRAM2: PHP & GD
+
+Oefening 3.1
+Neem bovenstaande code over.
+Herschrijf de code zodat deze werkt voor png-afbeeldingen
+
+Detailpagina met thumbnails
+Nu moeten de thumbnails getoond worden op de overzichtspagina.
+Omdat de thumbnails (bijna) dezelfde naam hebben als de originele afbeeldingen
+hoeft er maar weinig verandert te worden.
+Het is daarom zelfs niet nodig om de namen van de thumbnails in de databasetabel
+te zetten.
+Op ‘overzicht.php’ hoeft niks verandert te worden. We lezen nog steeds dezelfde
+gegevens uit de database.
+Als je hier de afbeeldingmap hebt aangegeven, dan moet die wél aangepast: maak
+ook een variabele voor de thumbnailsmap.
+
+‘overzicht_view.php’ heeft wel een kleine aanpassing nodig: we moeten nu de
+thumbnails uit de map ‘thumbnails halen.
+
+En natuurlijk is ook de ‘height’ van de image weggehaald.
+
+15
+
+PROGRAM2: PHP & GD
+HOOFDSTUK 4: WATERMERK
+
+Soms zijn afbeeldingen via het auteursrecht beschermd. Je wil dan niet dat een
+gebruiker het originele bestand kan downloaden.
+Om dat te voorkomen kan je een watermerk toevoegen aan een afbeelding.
+Het watermerk is vaak een afbeelding die over de originele afbeelding wordt
+geplaatst.
+Dit gebeurt in een aantal stappen:
+1.
+2.
+3.
+4.
+5.
+
+Maak een werkbare kopie van de originele afbeelding
+Maak een werkbare kopie van het watermerk
+Maak een canvas waarin deze twee worden samengevoegd
+Voeg de twee afbeeldingen samen in het canvas
+Sla het canvas op als afbeelding
+
+Ook hier moet je rekening houden met het verkleinen/vergroten van de afbeeldingen.
+Kijk ook op internet naar uitleg over dit onderwerp. Bijvoorbeeld:
+•
+•
+•
+
+https://www.webslesson.info/2016/02/how-to-insert-watermark-on-to-image-using-php-gdlibrary.html
+https://code-boxx.com/add-watermark-php/
+https://www.slingacademy.com/article/how-to-programmatically-add-watermark-to-an-imagein-php/
+
+Een watermerk op een afbeelding plaatsen
+Hieronder volgen de eerste stappen die je moet nemen om een watermerk op een
+ge-uploade afbeelding te plaatsen.
+Het watermerk staat hier al klaar op de server: ‘watermerk/sample-watermark.jpg’.
+•
+
+Allereerst alle benodigde variabelen klaarzetten.
+
+•
+
+Als het uploaden is gelukt: de gegevens van de originele afbeelding en het
+watermerk ophalen.
+
+16
+
+PROGRAM2: PHP & GD
+
+•
+
+Maak een werkbare kopie van het origineel en het watermerk
+
+•
+
+Maak een leeg canvas en plaats het watermerk in het canvas.
+Dit doen we om het watermerk dezelfde grootte te geven als de originele
+afbeelding. Let op: het canvas heeft dus dezelfde grootte als de ge-uploade
+afbeelding.
+
+imagecopymerge()
+Om de afbeeldingen samen te voegen, maek je gebruik van een nieuwe functie:
+imagecopymerge().
+Hierin kan je o.a. de transparantie aangeven van één van de afbeeldingen: de
+tweede afbeelding die wordt genoemd. Het laatse getal in de functie geeft deze
+transparantie aan.
+•
+
+Voeg de twee werkbare afbeeldingen samen. Let hierbij goed op de volgorde
+van de afbeeldingen en de overige waarden.
+
+•
+
+Sla de nieuwe afbeelding op.
+
+17
+
+PROGRAM2: PHP & GD
+•
+
+Als laatste: verwijder de werkbare kopieën
+
+De totale code om een watermerk te plaatsen ziet er nu als volgt uit:
+
+LET OP:
+In het voorbeeld is gewerkt met afbeeldingen van het type ‘jpg’
+Je kan bovenstaande code dus niet zomaar toepassen op gif’s of png’s.
+Zoek zelf uit hoe je dit kan gebruiken voor gif of png.
+
+Oefening 4.1
+Neem bovenstaande code over.
+Experimenteer met de diverse waarden: kan je het watermerk ook kleiner of groter
+maken? En kan deze op een andere plaats op de originele afbeelding worden
+geplaatst?
+18
+
+PROGRAM2: PHP & GD
+
+Tekst op afbeelding
+Het is ook mogelijk om een tekst op een afbeelding te plaatsen. Je hoeft dan niet van
+tevoren een afbeelding van een watermerk te hebben en je kan variëren in de tekst.
+Hoe dit werkt, wordt niet uigelegd in deze reader. Je zal dus zelf hierover informatie
+moeten vinden op internet.
+Bijvoorbeeld:
+•
+•
+
+https://phppot.com/php/php-watermark/
+https://www.php.net/manual/en/function.imagettftext.php
+
+19
+
+PROGRAM2: PHP & GD
+
+OPDRACHTEN
+
+OPDRACHT 1
+Maak in de database ‘PROGRAM2’ een nieuwe tabel: ‘afbeeldingen’.
+Inde tabel staan 4 velden:
+•
+•
+•
+•
+
+ID
+Uploader
+Titel
+Afbeelding
+
+Primary key, Auto nummering
+Naam van de uploader
+Titel van de afbeelding
+Naam van de afbeelding
+
+Maak een formulier om afbeeldingen te uploaden.
+In het formulier worden de volgende gegevens gevraagd
+•
+•
+•
+
+Naam van de uploader
+Naam van het bestand
+Het bestand zelf
+
+Het formulier wordt verstuurd naar een verwerkpagina, waar het volgende gebeurt:
+•
+•
+•
+
+Alle gegevens worden uitgelezen
+De afbeelding wordt verplaatst naar een aparte map (‘images’)
+Alle gegevens worden opgeslagen in de databasetabel ‘afbeeldingen’
+
+Maak ook een overzichtspagina waarin alle afbeeldingen netjes worden getoond,
+samen met de naam van de uploader en de titel van de afbeelding.
+Zorg dat op alle pagina’s de code en view wordt gescheiden.
+
+OPDRACHT 1 (extra)
+Controleer de velden van het formulier:
+•
+•
+
+Check of de naam van de uploader en de titel zijn ingevuld
+Controleer of het ge-uploade bestand een afbeelding is
+Zoek zelf uit hoe je dit moet doen
+20
+
+PROGRAM2: PHP & GD
+Als er iets niet klopt dan wordt er geen bestand ge-upload en ook niks
+weggeschreven in de tabel.
+De gebruiker krijgt een waarschuwing.
+
+OPDRACHT 2
+Vul opdracht 1 aan met de volgende functionaliteit:
+•
+
+Van elke ge-uploade afbeelding wordt een thumbnail gemaakt.
+
+Maak daarvoor een map “thumbnails op de server”.
+Zorg eerst dat deze functionaliteit werkt voor jpg-afbeeldingen
+Vul daarna aan voor gif en png.
+Pas dan de overzichtspagina aan:
+Op deze pagina staan alleen de thumbnails, netjes naast elkaar.
+Als op een thumbnail wordt geklikt dan opent de detailpagina.
+Op deze pagina is de originele afbeelding te zien met de overige gegevens (uploader
+en titel)
+
+OPDRACHT 3
+Vul opdracht 2 aan met de volgende functionaliteit:
+•
+•
+
+Op elke afbeelding die is ge-upload wordt een watermerk geplaatst.
+De afbeelding met watermerk wordt in een aparte map bewaard: “watermerk”
+
+Maak zelf een watermerk, of zoek er eentje op internet.
+Zorg eerst dat deze functionaliteit werkt voor jpg-afbeeldingen
+Vul daarna aan voor gif en png.
+Pas dan de detailpagina aan:
+Op deze pagina staat de afbeelding met watermerk.
+
+21
+
+
