@@ -4,7 +4,7 @@ session_start();
 
 // Als de user al ingelog is dan wordt hij doorgestuurd naar de index pagina
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 ?>
@@ -23,7 +23,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">Future Heritage Foundation</h1>
         <h2 class="text-xl text-gray-600 text-center mb-6">Inloggen</h2>
 
-        <form action="login_verwerk.php" method="POST" class="space-y-4">
+        <form action="../login_verwerk.php" method="POST" class="space-y-4">
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Gebruikersnaam:</label>
                 <input type="text" id="username" name="username" required

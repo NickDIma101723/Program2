@@ -19,18 +19,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Controleer of alle velden zijn ingevuld
     if (empty($uploader) || empty($titel)) {
-        die("Fout: Vul alle velden in. <a href='upload.php'>Terug</a>");
+        $_SESSION['error'] = "Vul alle velden in.";
+        header("Location: upload.php");
+        exit();
     }
     
     // Controleer of er een bestand is geüpload
     if ($bestand['error'] !== UPLOAD_ERR_OK) {
-        die("Fout: Er is een fout opgetreden bij het uploaden. <a href='upload.php'>Terug</a>");
+        $_SESSION['error'] = "Er is een fout opgetreden bij het uploaden.";
+        header("Location: upload.php");
+        exit();
     }
     
-    // Controleer of het bestand een afbeelding is
+    // Controleer of het bestand een afbeelding is (Extra Opdracht)
+    $check = getimagesize($bestand['tmp_name']);
+    if ($check === false) {
+        $_SESSION['error'] = "Het bestand is geen geldige afbeelding.";
+        header("Location: upload.php");
+        exit();
+    }
+
+    // Extra check op extensie voor de zekerheid
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     if (!in_array($bestand['type'], $allowed_types)) {
-        die("Fout: Alleen afbeeldingen (JPG, PNG, GIF, WebP) zijn toegestaan. <a href='upload.php'>Terug</a>");
+        $_SESSION['error'] = "Alleen JPG, PNG, GIF en WebP bestanden zijn toegestaan.";
+        header("Location: upload.php");
+        exit();
     }
     
     // Bestandsnaam veilig maken
@@ -56,11 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
             
         } catch (PDOException $e) {
-            die("Database fout: " . $e->getMessage());
+            $_SESSION['error'] = "Database fout: " . $e->getMessage();
+            header("Location: upload.php");
+            exit();
         }
         
     } else {
-        die("Fout: Bestand kon niet worden verplaatst. <a href='upload.php'>Terug</a>");
+        $_SESSION['error'] = "Fout: Bestand kon niet worden verplaatst.";
+        header("Location: upload.php");
+        exit();
     }
     
 } else {

@@ -12,10 +12,11 @@
         <div class="font-bold text-xl">Anime Manager</div>
         <div class="flex items-center space-x-4">
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+                <a href="overzicht.php" class="hover:text-gray-300 mr-4">Uploads</a>
                 <span>Welcome, <?=($_SESSION['username']) ?></span>
-                <a href="logout.php" class="hover:text-gray-300">Logout</a>
+                <a href="logout.php" class="hover:text-gray-300 ml-4">Logout</a>
             <?php else: ?>
-                <a href="login_view.php" class="hover:text-gray-300">Login</a>
+                <a href="views/login_view.php" class="hover:text-gray-300">Login</a>
             <?php endif; ?>
         </div>
     </div>

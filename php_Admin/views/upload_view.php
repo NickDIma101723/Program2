@@ -11,6 +11,12 @@
         <div class="bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto mt-10">
             <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">Afbeelding Uploaden</h1>
 
+            <?php if (!empty($error)): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
+
             <form action="upload_verwerk.php" method="POST" enctype="multipart/form-data" class="space-y-4">
                 <div>
                     <label for="uploader" class="block text-sm font-medium text-gray-700 mb-1">Naam van de uploader:</label>
