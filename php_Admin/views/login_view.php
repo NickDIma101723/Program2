@@ -2,7 +2,6 @@
 
 session_start();
 
-// Als de user al ingelog is dan wordt hij doorgestuurd naar de index pagina
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header("Location: ../index.php");
     exit();

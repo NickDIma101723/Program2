@@ -5,22 +5,18 @@ require 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Controleert of beide velden zijn ingevuld
     if (isset($_POST['username']) && isset($_POST['password'])) {
        
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
 
-        // Beide velden moeten ingevuld zijn
         if (empty($username) || empty($password)) {
             die("Fout: vul beide velden in! <a href='views/login_view.php'>Terug</a>");
         }
 
-        // Wachtwoord wordt gehashed met sha1
         $password_hash = sha1($password);
 
         $query = "SELECT * FROM Users WHERE username = :username AND password = :password_hash";
-        // Controleert in de database of de gebruiker bestaat
         try {
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':username', $username);

@@ -22,14 +22,12 @@
     </div>
 </nav>
 
-<!-- Anime List Content -->
 <div class="container mx-auto p-6">
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Agenda</h1>
     <div class="mb-4">
         <a href="agenda_toevoegen_verwerk.php" class="text-blue-600 hover:text-blue-800 font-medium">Add New Anime</a>
     </div>
 
-    <!-- Anime List -->
     <?php if($amountRows > 0) { ?>
         <ul class="space-y-4">
             <?php foreach ($result as $row) { ?>
