@@ -3,9 +3,14 @@ session_start();
 require 'config.php';
 
 $map = "images/";
+$tn_map = "thumbnails/";
 
 if (!file_exists($map)) {
     mkdir($map, 0777, true);
+}
+
+if (!file_exists($tn_map)) {
+    mkdir($tn_map, 0777, true);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,6 +51,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $unieke_naam = time() . '_' . $bestandsnaam;
     
     if (move_uploaded_file($bestand['tmp_name'], $map . $unieke_naam)) {
+        
+        $info = getimagesize($map . $unieke_naam);
+        
+        if ($info['mime'] == 'image/jpeg') {
+            $origineel = imagecreatefromjpeg($map . $unieke_naam);
+            $thumb = imagecreatetruecolor(100, 100);
+            imagecopyresampled($thumb, $origineel, 0, 0, 0, 0, 100, 100, $info[0], $info[1]);
+            imagejpeg($thumb, $tn_map . 'tn_' . $unieke_naam);
+            imagedestroy($origineel);
+            imagedestroy($thumb);
+        } elseif ($info['mime'] == 'image/png') {
+            $origineel = imagecreatefrompng($map . $unieke_naam);
+            $thumb = imagecreatetruecolor(100, 100);
+            imagealphablending($thumb, false);
+            imagesavealpha($thumb, true);
+            imagecopyresampled($thumb, $origineel, 0, 0, 0, 0, 100, 100, $info[0], $info[1]);
+            imagepng($thumb, $tn_map . 'tn_' . $unieke_naam);
+            imagedestroy($origineel);
+            imagedestroy($thumb);
+        } elseif ($info['mime'] == 'image/gif') {
+            $origineel = imagecreatefromgif($map . $unieke_naam);
+            $thumb = imagecreatetruecolor(100, 100);
+            imagecopyresampled($thumb, $origineel, 0, 0, 0, 0, 100, 100, $info[0], $info[1]);
+            imagegif($thumb, $tn_map . 'tn_' . $unieke_naam);
+            imagedestroy($origineel);
+            imagedestroy($thumb);
+        }
         
         try {
             $query = "INSERT INTO afbeeldingen (Uploader, Titel, Afbeelding) VALUES (:uploader, :titel, :afbeelding)";

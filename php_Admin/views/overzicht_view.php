@@ -27,15 +27,15 @@
             <?php else: ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <?php foreach ($afbeeldingen as $afbeelding): ?>
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
-                            <img src="<?= $map . htmlspecialchars($afbeelding['Afbeelding']) ?>" 
+                        <a href="image_detail.php?ID=<?= $afbeelding['ID'] ?>" class="bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition block">
+                            <img src="<?= $tn_map . 'tn_' . htmlspecialchars($afbeelding['Afbeelding']) ?>" 
                                  alt="<?= htmlspecialchars($afbeelding['Titel']) ?>"
                                  class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h3 class="font-semibold text-gray-800 truncate"><?= htmlspecialchars($afbeelding['Titel']) ?></h3>
                                 <p class="text-sm text-gray-600">Door: <?= htmlspecialchars($afbeelding['Uploader']) ?></p>
                             </div>
-                        </div>
+                        </a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>

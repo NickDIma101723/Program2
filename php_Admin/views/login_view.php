@@ -14,12 +14,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inloggen Future Heritage Foundation</title>
+    <title>Inloggen</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">Future Heritage Foundation</h1>
+        <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">Anime Manager</h1>
         <h2 class="text-xl text-gray-600 text-center mb-6">Inloggen</h2>
 
         <form action="../login_verwerk.php" method="POST" class="space-y-4">

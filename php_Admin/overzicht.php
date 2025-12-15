@@ -4,6 +4,7 @@ require 'session.inc.php';
 require 'config.php';
 
 $map = "images/";
+$tn_map = "thumbnails/";
 
 try {
     $query = "SELECT * FROM afbeeldingen ORDER BY ID DESC";
