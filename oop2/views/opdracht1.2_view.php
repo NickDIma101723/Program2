@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Berekening Kamer</h1>
-    <p>Oppervlakte (5x4): <?php echo $oppervlakte; ?> m²</p>
-    <p>Inhoud (5x4x3): <?php echo $inhoud; ?> m³</p>
+    <p>Oppervlakte (5x4): <?= $oppervlakte; ?> m²</p>
+    <p>Inhoud (5x4x3): <?= $inhoud; ?> m³</p>
 </body>
 </html>

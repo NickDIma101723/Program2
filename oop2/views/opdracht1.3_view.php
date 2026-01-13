@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Nederlandse Datum</h1>
-    <p>Voluit: <?php echo $datumVoluit; ?></p>
-    <p>Kort: <?php echo $datumKort; ?></p>
+    <p>Voluit: <?=  $datumVoluit; ?></p>
+    <p>Kort: <?= $datumKort; ?></p>
 </body>
 </html>

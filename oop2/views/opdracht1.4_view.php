@@ -8,7 +8,7 @@
     <h1>Mag Stemmen?</h1>
     <ul>
         <?php foreach ($results as $result): ?>
-            <li>Leeftijd: <?php echo htmlspecialchars($result['leeftijd']); ?> - Mag stemmen: <?php echo $result['magStemmen'] ? 'Ja' : 'Nee'; ?></li>
+            <li>Leeftijd: <?= htmlspecialchars($result['leeftijd']); ?> - Mag stemmen: <?= $result['magStemmen'] ? 'Ja' : 'Nee'; ?></li>
         <?php endforeach; ?>
     </ul>
 </body>
