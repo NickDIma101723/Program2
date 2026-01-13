@@ -2,9 +2,9 @@
 
 function berekenKamer($lengte, $breedte, $hoogte = null) {
     if ($hoogte === null) {
-        return $lengte * $breedte; // oppervlakte
+        return $lengte * $breedte;
     } else {
-        return $lengte * $breedte * $hoogte; // inhoud
+        return $lengte * $breedte * $hoogte;
     }
 }
 
