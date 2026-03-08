@@ -30,11 +30,11 @@
         </tr>
         <?php foreach ($rekeningen as $rekening): ?>
         <tr>
-            <td><?= htmlspecialchars($rekening->rekeningNummer) ?></td>
-            <td><?= htmlspecialchars($rekening->naamEigenaar) ?></td>
-            <td><?= htmlspecialchars($rekening->saldo) ?></td>
-            <td><?= htmlspecialchars($rekening->opnameLimiet) ?></td>
-            <td><?= htmlspecialchars($rekening->maxRood) ?></td>
+            <td><?= htmlspecialchars($rekening->getRekeningNummer()) ?></td>
+            <td><?= htmlspecialchars($rekening->getNaamEigenaar()) ?></td>
+            <td><?= htmlspecialchars($rekening->getSaldo()) ?></td>
+            <td><?= htmlspecialchars($rekening->getOpnameLimiet()) ?></td>
+            <td><?= htmlspecialchars($rekening->getMaxRood()) ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
